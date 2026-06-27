@@ -129,6 +129,29 @@ class ClassroomRepository(BaseRepository[Classroom]):
             is not None
         )
 
+    def get_enrollment(self, classroom_id: str, student_id: str):
+        """Return the Enrollment row or None — used by assignments service."""
+        return (
+            self.session.query(Enrollment)
+            .filter(
+                Enrollment.classroom_id == classroom_id,
+                Enrollment.student_id == student_id,
+            )
+            .first()
+        )
+
+    def get_student_classrooms(self, student_id: str) -> List[Enrollment]:
+        """Return all Enrollment rows for a student — used by assignments service."""
+        return (
+            self.session.query(Enrollment)
+            .filter(Enrollment.student_id == student_id)
+            .all()
+        )
+
+    def get_students(self, classroom_id: str) -> List[Enrollment]:
+        """Alias for get_enrollments — used by assignments service status tracker."""
+        return self.get_enrollments(classroom_id)
+
     # Invite operations
     def create_invite(
         self,

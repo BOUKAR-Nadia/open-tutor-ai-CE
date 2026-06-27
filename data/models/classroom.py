@@ -33,6 +33,9 @@ class Classroom(Base):
     sessions = relationship(
         "ClassSession", back_populates="classroom", cascade="all, delete-orphan"
     )
+    assignments = relationship(
+        "Assignment", back_populates="classroom", cascade="all, delete-orphan"
+    )
 
     def to_dict(self) -> dict:
         return {

@@ -40,6 +40,8 @@ from .routers import (
     classrooms as classrooms_router,
     sessions as class_sessions_router,
     announcements as announcements_router,
+    guardians as guardians_router,
+    assignments as assignments_router,
 )
 from gateway.http.api_routes import register_api_routes
 from gateway.realtime.socket import socket_app
@@ -175,6 +177,10 @@ def create_app() -> FastAPI:
 
     # Classroom announcements — router declares each route's full path
     app.include_router(announcements_router.router)
+
+    # Guardians and Assignments — under /api/v1
+    app.include_router(guardians_router.router, prefix="/api/v1")
+    app.include_router(assignments_router.router, prefix="/api/v1")
 
     # Socket.IO — mounted at /realtime; client uses path='/realtime/socket.io'
     app.mount("/realtime", socket_app)

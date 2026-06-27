@@ -8,6 +8,8 @@ from .config import AppConfig
 from .knowledge import KnowledgeBase, KnowledgeFile
 from .classroom import Classroom
 from .enrollment import Enrollment
+from .guardian import Guardian
+from .assignment import Assignment, Submission
 from .session import ClassSession
 from .presence import Presence, PresenceStatus
 from .invite import Invite
@@ -31,4 +33,7 @@ __all__ = [
     "Announcement",
     "Presence",
     "PresenceStatus",
+    "Guardian",
+    "Assignment",
+    "Submission",
 ]
